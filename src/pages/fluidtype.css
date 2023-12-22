@@ -1,0 +1,51 @@
+
+.aboveline{
+   margin: 0;
+   padding: 0;
+   display: flex;
+}
+
+.fluid{
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+.fluidtype{
+    margin-top: 50px;
+    margin-left: 10px;
+  display: flex;
+}
+
+#checkbox{
+    margin-left: 40;
+}
+
+
+.gas{
+        margin-top: 20px;
+        margin-left: 15px;
+        display: flex;
+        justify-content: space-between;
+}
+
+.oil{
+    margin-top: 20px;
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .imagediv{
+    margin: 10px;
+} */
+
+/* #textfield{
+    margin-top: 50px;
+} */
+
+.resizeimage{
+    margin-top: 30px;
+    margin-left: 15px;
+    height: 30px;
+    width: 130px;
+}

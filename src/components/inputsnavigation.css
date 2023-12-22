@@ -1,0 +1,14 @@
+h1{
+    margin: 0px;
+    padding: 65px;
+}
+
+.btn{
+    margin-top: 20px;
+    margin-left: 55px;
+    height: 55px;
+    width: 235px;
+    background-color: rgb(73, 70, 70);  background-color: rgb(54, 53, 53);  color: white;
+    border-radius: 12px;
+    align-items: center;
+}
