@@ -39,18 +39,15 @@ const handleSignup =()=>{
   navigate("/")
 }
 
-const handledatagrid = ()=>{
-  navigate('/datagrid')
-}
   
   return (
     <div className="login-form">
       <h1>Login Here</h1>
-    <TextField label="Username" variant="outlined" fullWidth onChange={handleName}/>
-    <TextField label="Password" type="password" variant="outlined" fullWidth onChange={handlePass}/>
-    <Button variant="contained" color="primary" onClick={handleLogin}>Login</Button>
-    <Button variant="contained" color="primary" onClick={handleSignup}>SignUp First</Button>
-    <Button variant="contained" color="primary" onClick={handledatagrid}>Username/Passwords</Button>
+    <TextField label="Username" className='text' variant="outlined" fullWidth onChange={handleName}/>
+    <TextField label="Password" className='text' type="password" variant="outlined" fullWidth onChange={handlePass}/>
+    <Button variant="contained" className='btn'  color="primary" onClick={handleLogin}>Login</Button>
+    <Button variant="contained" className='btn' color="primary" onClick={handleSignup}>SignUp First</Button>
+
 </div>
   )
 }

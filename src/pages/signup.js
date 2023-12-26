@@ -76,19 +76,24 @@ function Signup() {
 
 
   return ( 
-    <form onSubmit={handleSignUp}>
-    <div className='main'>
-      <h1>SignUp Here!</h1>
-      
-    <TextField type='text' label="Name" variant="outlined" className='input' onChange={handleChangeName} required></TextField> <br/>
-    <TextField label="Username" variant="outlined" className='input' onChange={handleChangeUname} required></TextField><br/>
-    <TextField type='text' label="password" inputProps={{ maxLength: 12 }} variant="outlined" className='input' onChange={handleChangePass} required></TextField><br/>
-    <TextField type='password' label="confirm password" variant="outlined" className='input' onChange={handleCpass} required></TextField><br/>
-    <Button type="submit" variant="contained" color="primary" className='input' >Confirm</Button><br/>
-    <Button variant="contained" color="primary" className='input' onClick={handleLogin}> Login page</Button>
 
-    </div>
+      <div className='main' >
+
+<form onSubmit={handleSignUp}  className='signupform'>
+      <h1 >SignUp Here!</h1>
+
+    <TextField type='text' label="Name" variant="outlined" className='text' onChange={handleChangeName} required></TextField> <br/>
+    <TextField label="Username" variant="outlined" className='text' onChange={handleChangeUname} required></TextField><br/>
+    <TextField type='text' label="password" inputProps={{ maxLength: 12 }} variant="outlined" className='text' onChange={handleChangePass} required></TextField><br/>
+    <TextField type='password' label="confirm password" variant="outlined" className='text' onChange={handleCpass} required></TextField><br/>
+    <Button type="submit" variant="contained" color="primary" className='btnn' >Confirm</Button><br/>
+    <Button variant="contained" color="primary" className='btnn' onClick={handleLogin}> Login page</Button>
+
     </form>
+    </div>
+
+
+
   
 
   )

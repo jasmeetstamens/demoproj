@@ -8,7 +8,7 @@ import View from './pages/view';
 import { useState } from 'react';
 import Signup from './pages/signup';
 import Login from './pages/login';
-import Mydatagrid from './pages/datagrid';
+
 
 
 function App() {
@@ -37,17 +37,20 @@ function App() {
         </BrowserRouter>
          </div>
         ) : 
+
         (
+          <div className="or">  
           <BrowserRouter> 
              <Routes>
              <Route path='/' element={<Signup />} />
           <Route path='/login' element={<Login setLogin={setLogin} setLoginusername={setLoginusername}/>} />
-          <Route path='/datagrid' element={<Mydatagrid/>}/>
+          
              </Routes>
           </BrowserRouter>
+          </div>
         )
 
-           
+      
 
       
   );
