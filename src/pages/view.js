@@ -49,7 +49,7 @@ const columns = [
 
   return (
 
-  <div style={{ height: 700, width: '100%', marginTop: 15, marginLeft:5}}>
+  <div style={{ height: '100%', width: '100%', marginTop: 15, marginLeft:5}}>
   <DataGrid rows={row} columns={columns} />
 </div> 
 )

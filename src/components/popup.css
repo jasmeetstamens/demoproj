@@ -1,0 +1,27 @@
+
+.popup{
+    border: solid 2px rgb(48, 139, 237);
+    background-color: rgb(48, 139, 237);
+    color: black;
+    height: 80px;
+    width: 350px;
+    margin-top: 80%;
+    margin-left: 100%;
+
+}
+
+.ppop{
+    margin-top: 1px;
+    margin-left: 5px;
+}
+
+.popbtn{
+    margin-top: 3px;
+    margin-left: 27%;
+    /* margin-bottom: 3px; */
+}
+
+.cancelbtn{
+    margin-top: 3px;
+    margin-left: 6%;
+}

@@ -23,13 +23,17 @@
 
 
 .gas{
+    position: relative;
+    z-index: 1;
         margin-top: 20px;
-        /* margin-left: 15px; */
+        margin-left: 15px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
 }
 
 .oil{
+    position: relative;
+    z-index: 1;
     margin-top: 20px;
     margin-left: 15px;
     display: flex;
@@ -44,19 +48,18 @@
     margin-top: 50px;
 } */
 
-.resizeimage{
-    margin-top: 30px;
-    margin-left: 15px;
-    height: 30px;
-    width: 130px;
-}
 
 .oilselect{
-        height: 240%;
-        width: 480%;
+        height: 70%;
+        width: 15vw;
 }
 
 .gasselect{
-    height: 240%;
-    width: 480%;
+    height: 70%;
+    width: 15vw;
+}
+
+.resize{
+    position: absolute;
+    z-index: 6;
 }

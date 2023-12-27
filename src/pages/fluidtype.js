@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select, { selectClasses } from '@mui/material/Select';
 import './fluidtype.css'
 import { Button, Checkbox, Typography } from '@mui/material';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
 import  Resizer  from 'react-image-file-resizer'; 
-
+import Popup from '../components/popup';
 
 
 
@@ -24,7 +24,7 @@ function Fluidtype(props) {
   const [imageName, setImageName] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageurl, setImageurl] = useState("")
-
+  const [resize, setResize] = useState(false)
   const [num, setNum] = useState([1]);
 
 
@@ -63,6 +63,7 @@ const handleWater = (e)=>{
     setSelectedImage(file);
 
 
+
     if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
 
       if (file.size < 1024 * 1024) {
@@ -76,13 +77,8 @@ const handleWater = (e)=>{
         reader.readAsDataURL(file);
       } else {
 
-        alert('max. size reached! update size')
         setImageName('')  
           
-
-
-
-
 
       }
     } else {
@@ -122,46 +118,47 @@ const handleWater = (e)=>{
     }
   }, [data])
 
+    const greatersize = selectedImage && selectedImage.size && selectedImage.size>1024*1024;
 
-  const Resize = async () => {
- 
+    const Resize = async() =>{
     if (!imageName) {
       if (selectedImage) {
-           if(selectedImage.size> 1024*1024){
+           if(greatersize){
+            const resizeFile = (file) =>
+            new Promise((resolve) => {
+              Resizer.imageFileResizer(
+                file,
+                1023,
+                1023,
+                'JPEG',
+                100,
+                0,
+                (resizedImage) => {
+                  resolve(resizedImage);
+                },
+                      "base64"
+                    );
+                })
             try {
-              const resizedImage = await resizeFile(selectedImage);
+    const resizedImage = await resizeFile(selectedImage);
               setSelectedImage(resizedImage)
               setImageName(selectedImage.name);
               setImageurl(resizedImage)
-            
                 }
-              
               // setImageName(file.name);
               // console.log(resizedImage);
              catch (err) {
               console.log(err);
             }
           }
-        }
-      };
     }
-
-      const resizeFile = (file) =>
-      new Promise((resolve) => {
-        Resizer.imageFileResizer(
-          file,
-          1023,
-          1023,
-          'JPEG',
-          100,
-          0,
-          (resizedImage) => {
-            resolve(resizedImage);
-          },
-                "base64"
-              );
-          })
-           
+      };
+      
+    }
+    
+      useEffect(()=>{
+        Resize()
+      },[resize])     
                            
     
 
@@ -172,27 +169,53 @@ const handleWater = (e)=>{
     return (
 
       <div className='main-fluid'>
+  
+  <div className='resize'>
+          {greatersize?
+               (<Popup setResize={setResize} />): null
+              }
+   </div>
+
         <div className='aboveline'>
           <p className='fluid'>FluidType:</p>
 
           <div className='fluidtype'>
             <Box  >
-              <FormControl >
-                <InputLabel id="select" style={{ color: 'White' }}>Select</InputLabel>
-                <Select
+
+             <FormControl >
+
+                <InputLabel id="select" style={{ color: 'White' }} >Select</InputLabel>
+            {greatersize ?     <Select
+                  id="select"
+                  style={{ width: 250, height: 40 }}
+                  value={fluid}
+                  onChange={handleFluid}
+                  disabled
+                >
+             
+                  <MenuItem value='Gas'>Gas</MenuItem>
+                  <MenuItem value='Oil'>Oil</MenuItem>
+                </Select> :     <Select
                   id="select"
                   style={{ width: 250, height: 40 }}
                   value={fluid}
                   onChange={handleFluid}
                 >
+             
                   <MenuItem value='Gas'>Gas</MenuItem>
                   <MenuItem value='Oil'>Oil</MenuItem>
-                </Select>
+                </Select> }
+           
+
+             
 
               </FormControl>
+          
             </Box>
             <Box sx={{ display: 'flex', marginLeft: 7 }}>
-              <Checkbox id='checkbox' style={{ color: 'white' }} onChange={handleWater} value={water} checked={water==='checked'}/>
+        {greatersize ?   <Checkbox id='checkbox' style={{ color: 'white' }} onChange={handleWater} value={water} checked={water==='checked'} disabled/> :
+          <Checkbox id='checkbox' style={{ color: 'white' }} onChange={handleWater} value={water} checked={water==='checked'}/> }
+            
               <Typography style={{ marginTop: 10 }}>Water</Typography>
 
             </Box>
@@ -209,62 +232,104 @@ const handleWater = (e)=>{
 
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Temperature</InputLabel>
-                <Select
+          {greatersize ?    <Select
                   className='oilselect'
                   value={temp}
                   onChange={handleTemp}
-                >
+             disabled   >
                   <MenuItem value='23deg' >23 deg</MenuItem>
                   <MenuItem value='25deg'>25 deg</MenuItem>
                   <MenuItem value='0deg'>0 deg</MenuItem>
                   <MenuItem value='55deg'>55 deg</MenuItem>
                   <MenuItem value='73deg'>73 deg</MenuItem>
                   <MenuItem value='100deg'>100 deg</MenuItem>
-                </Select>
+                </Select> : 
+                   <Select
+                   className='oilselect'
+                   value={temp}
+                   onChange={handleTemp}
+                 >
+                   <MenuItem value='23deg' >23 deg</MenuItem>
+                   <MenuItem value='25deg'>25 deg</MenuItem>
+                   <MenuItem value='0deg'>0 deg</MenuItem>
+                   <MenuItem value='55deg'>55 deg</MenuItem>
+                   <MenuItem value='73deg'>73 deg</MenuItem>
+                   <MenuItem value='100deg'>100 deg</MenuItem>
+                 </Select>
+                 }
+             
 
               </FormControl>
 
 
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Z-factor</InputLabel>
-                <Select
+              
+             {greatersize ?  <Select
                   className='oilselect'
                
                   value={zfactor}
                   onChange={handleZ}
-                >
+              disabled  >
                   <MenuItem value='1'>1</MenuItem>
                   <MenuItem value='2'>2</MenuItem>
                   <MenuItem value='3'>3</MenuItem>
                   <MenuItem value='4'>4</MenuItem>
                   <MenuItem value='5'>5</MenuItem>
                   <MenuItem value='6'>6</MenuItem>
-                </Select>
+                </Select> : 
+                 <Select
+                 className='oilselect'
+              
+                 value={zfactor}
+                 onChange={handleZ}
+               >
+                 <MenuItem value='1'>1</MenuItem>
+                 <MenuItem value='2'>2</MenuItem>
+                 <MenuItem value='3'>3</MenuItem>
+                 <MenuItem value='4'>4</MenuItem>
+                 <MenuItem value='5'>5</MenuItem>
+                 <MenuItem value='6'>6</MenuItem>
+               </Select>
+               } 
+               
 
               </FormControl>
 
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Oil formation volume factor</InputLabel>
-                <Select
+            
+           {greatersize ?     <Select
                   className='oilselect'
-             
                   value={volume}
                   onChange={handleVolume}
+                  disabled
                 >
                   <MenuItem value='internal'>internal</MenuItem>
                   <MenuItem value='external'>external</MenuItem>
                   <MenuItem value='null'>null</MenuItem>
                 </Select>
-
+          :     <Select
+          className='oilselect'
+     
+          value={volume}
+          onChange={handleVolume}
+        >
+          <MenuItem value='internal'>internal</MenuItem>
+          <MenuItem value='external'>external</MenuItem>
+          <MenuItem value='null'>null</MenuItem>
+        </Select>
+    } 
+            
               </FormControl>
 
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Oil Density</InputLabel>
-                <Select
-                 
-                  className='oilsselect'
+              {greatersize ? <Select
+                  className='oilselect'
                   value={density}
                   onChange={handleDensity}
+                  disabled
                 >
                   <MenuItem value='100'>100</MenuItem>
                   <MenuItem value='200'>200</MenuItem>
@@ -272,7 +337,19 @@ const handleWater = (e)=>{
                   <MenuItem value='400'>400</MenuItem>
                   <MenuItem value='500'>500</MenuItem>
                 </Select>
-
+          : <Select
+          className='oilselect'
+          value={density}
+          onChange={handleDensity}
+        >
+          <MenuItem value='100'>100</MenuItem>
+          <MenuItem value='200'>200</MenuItem>
+          <MenuItem value='300'>300</MenuItem>
+          <MenuItem value='400'>400</MenuItem>
+          <MenuItem value='500'>500</MenuItem>
+        </Select>
+            }
+                
               </FormControl>
 
             </div></div>
@@ -284,12 +361,12 @@ const handleWater = (e)=>{
           <div className='gas'>
 
             <FormControl >
-              <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Temperature</InputLabel>
-              <Select
-            
+              <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Temperature</InputLabel>           
+            {greatersize ?  <Select
                 className='gasselect'
                 value={temp}
                 onChange={handleTemp}
+                disabled
               >
                 <MenuItem value='23deg'>23 deg</MenuItem>
                 <MenuItem value='25deg'>25 deg</MenuItem>
@@ -297,15 +374,39 @@ const handleWater = (e)=>{
                 <MenuItem value='55deg'>55 deg</MenuItem>
                 <MenuItem value='73deg'>73 deg</MenuItem>
                 <MenuItem value='100deg'>100 deg</MenuItem>
-              </Select>
+              </Select>: 
+               <Select
+               className='gasselect'
+               value={temp}
+               onChange={handleTemp}
+             >
+               <MenuItem value='23deg'>23 deg</MenuItem>
+               <MenuItem value='25deg'>25 deg</MenuItem>
+               <MenuItem value='0deg'>0 deg</MenuItem>
+               <MenuItem value='55deg'>55 deg</MenuItem>
+               <MenuItem value='73deg'>73 deg</MenuItem>
+               <MenuItem value='100deg'>100 deg</MenuItem>
+             </Select>}
+              
 
             </FormControl>
 
             <FormControl >
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Z-factor</InputLabel>
-              <Select
+           {greatersize ?   <Select
                 className='gasselect'
-              
+                value={zfactor}
+                onChange={handleZ}
+                disabled
+              >
+                <MenuItem value='1'>1</MenuItem>
+                <MenuItem value='2'>2</MenuItem>
+                <MenuItem value='3'>3</MenuItem>
+                <MenuItem value='4'>4</MenuItem>
+                <MenuItem value='5'>5</MenuItem>
+                <MenuItem value='6'>6</MenuItem>
+              </Select>:   <Select
+                className='gasselect'
                 value={zfactor}
                 onChange={handleZ}
               >
@@ -315,29 +416,50 @@ const handleWater = (e)=>{
                 <MenuItem value='4'>4</MenuItem>
                 <MenuItem value='5'>5</MenuItem>
                 <MenuItem value='6'>6</MenuItem>
-              </Select>
+              </Select>}
+            
 
             </FormControl>
 
             <FormControl >
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Gas formation volume factor</InputLabel>
-              <Select
+             {greatersize ?  <Select
                 className='gasselect'
-              
                 value={volume}
                 onChange={handleVolume}
+                disabled
               >
                 <MenuItem value='internal'>internal</MenuItem>
                 <MenuItem value='external'>external</MenuItem>
                 <MenuItem value='null'>null</MenuItem>
-              </Select>
+              </Select>: 
+               <Select
+               className='gasselect'
+               value={volume}
+               onChange={handleVolume}
+             >
+               <MenuItem value='internal'>internal</MenuItem>
+               <MenuItem value='external'>external</MenuItem>
+               <MenuItem value='null'>null</MenuItem>
+             </Select>}
+             
 
             </FormControl>
 
             <FormControl >
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Gas Density</InputLabel>
-              <Select
-             
+            {greatersize ?   <Select
+                className='gasselect'
+                value={density}
+                onChange={handleDensity}
+                disabled
+              >
+                <MenuItem value='100'>100</MenuItem>
+                <MenuItem value='200'>200</MenuItem>
+                <MenuItem value='300'>300</MenuItem>
+                <MenuItem value='400'>400</MenuItem>
+                <MenuItem value='500'>500</MenuItem>
+              </Select>:   <Select
                 className='gasselect'
                 value={density}
                 onChange={handleDensity}
@@ -347,7 +469,9 @@ const handleWater = (e)=>{
                 <MenuItem value='300'>300</MenuItem>
                 <MenuItem value='400'>400</MenuItem>
                 <MenuItem value='500'>500</MenuItem>
-              </Select>
+              </Select>}
+
+            
 
             </FormControl>
           </div></div>)}
@@ -362,26 +486,24 @@ const handleWater = (e)=>{
             id="image-input"
    
           /><br />
-          <TextField
-            label="Image Name"
-            value={imageName}
-            variant="outlined"
-            id='textfield'
-            style={{ width: 350, height: 40, marginLeft: 20, marginTop: 10 }}
-          />
 
-
-
-          <div className='resizeimage'>
-            {!imageName ?
-              (<><Button variant="contained" color="primary" onClick={Resize}>
-                update size
-              </Button>
-
-              </>) : null
-            }
- </div>
-
+          {greatersize ? 
+           <TextField
+           label="Image Name"
+           value={imageName}
+           variant="outlined"
+           id='textfield'
+           style={{ width: 350, height: 40, marginLeft: 20, marginTop: 10 }}
+           disabled
+         /> : 
+         <TextField
+         label="Image Name"
+         value={imageName}
+         variant="outlined"
+         id='textfield'
+         style={{ width: 350, height: 40, marginLeft: 20, marginTop: 10 }}
+       />}
+         
 
 
         </div>
