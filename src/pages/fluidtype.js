@@ -8,7 +8,7 @@ import './fluidtype.css'
 import { Button, Checkbox, Typography } from '@mui/material';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
-import  Resizer  from 'react-image-file-resizer';
+import  Resizer  from 'react-image-file-resizer'; 
 
 
 
@@ -16,8 +16,9 @@ import  Resizer  from 'react-image-file-resizer';
 function Fluidtype(props) {
 
   const [fluid, setFluid] = useState("");
+  const [water, setWater] = useState('not checked');
   const [temp, setTemp] = useState();
-  const [zfactor, setZfactor] = useState();
+  const [zfactor, setZfactor] = useState(); 
   const [volume, setVolume] = useState();
   const [density, setDensity] = useState();
   const [imageName, setImageName] = useState('');
@@ -35,6 +36,11 @@ function Fluidtype(props) {
     setFluid(e.target.value)
 
   }
+
+const handleWater = (e)=>{
+  setWater(e.target.checked ? 'checked':'not checked')
+  console.log(e.target.checked);
+}
 
   const handleTemp = (e) => {
     setTemp(e.target.value)
@@ -91,18 +97,18 @@ function Fluidtype(props) {
 
   useEffect(() => {
 
-    if (fluid, temp, zfactor, volume, density, imageurl) {
+    if (fluid, water, temp, zfactor, volume, density, imageurl) {
 
       const key = `key_${keys.uname}_${num}`;
 
       const store = {
-
         fluid: fluid,
-        temp: temp,
+        water: water,
+        temp: temp, 
         zfactor: zfactor,
         volume: volume,
         density: density,
-        image: imageurl
+        image: imageurl 
       };
 
 
@@ -186,7 +192,7 @@ function Fluidtype(props) {
               </FormControl>
             </Box>
             <Box sx={{ display: 'flex', marginLeft: 7 }}>
-              <Checkbox id='checkbox' style={{ color: 'white' }} />
+              <Checkbox id='checkbox' style={{ color: 'white' }} onChange={handleWater} value={water} checked={water==='checked'}/>
               <Typography style={{ marginTop: 10 }}>Water</Typography>
 
             </Box>
@@ -204,7 +210,6 @@ function Fluidtype(props) {
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Temperature</InputLabel>
                 <Select
-                  style={{ width: 350, height: 40 }}
                   className='oilselect'
                   value={temp}
                   onChange={handleTemp}
@@ -224,7 +229,7 @@ function Fluidtype(props) {
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Z-factor</InputLabel>
                 <Select
                   className='oilselect'
-                  style={{ width: 350, height: 40 }}
+               
                   value={zfactor}
                   onChange={handleZ}
                 >
@@ -242,7 +247,7 @@ function Fluidtype(props) {
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Oil formation volume factor</InputLabel>
                 <Select
                   className='oilselect'
-                  style={{ width: 350, height: 40 }}
+             
                   value={volume}
                   onChange={handleVolume}
                 >
@@ -256,7 +261,7 @@ function Fluidtype(props) {
               <FormControl >
                 <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Oil Density</InputLabel>
                 <Select
-                  style={{ width: 350, height: 40 }}
+                 
                   className='oilsselect'
                   value={density}
                   onChange={handleDensity}
@@ -281,7 +286,7 @@ function Fluidtype(props) {
             <FormControl >
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Temperature</InputLabel>
               <Select
-                style={{ width: 350, height: 40 }}
+            
                 className='gasselect'
                 value={temp}
                 onChange={handleTemp}
@@ -300,7 +305,7 @@ function Fluidtype(props) {
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Z-factor</InputLabel>
               <Select
                 className='gasselect'
-                style={{ width: 350, height: 40 }}
+              
                 value={zfactor}
                 onChange={handleZ}
               >
@@ -318,7 +323,7 @@ function Fluidtype(props) {
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Gas formation volume factor</InputLabel>
               <Select
                 className='gasselect'
-                style={{ width: 350, height: 40 }}
+              
                 value={volume}
                 onChange={handleVolume}
               >
@@ -332,7 +337,7 @@ function Fluidtype(props) {
             <FormControl >
               <InputLabel className="inputlabelselect" style={{ color: 'White' }}>Gas Density</InputLabel>
               <Select
-                style={{ width: 350, height: 40 }}
+             
                 className='gasselect'
                 value={density}
                 onChange={handleDensity}

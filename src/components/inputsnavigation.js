@@ -28,6 +28,8 @@ const handleView =()=>{
 const handleSave = (e)=>{
   // e.preventdefault();
  props.setSavedata(true);
+ alert('info saved')
+  
 }
 
   return (
