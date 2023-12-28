@@ -1,0 +1,21 @@
+
+
+.poppup{
+    border: solid 2px grey;
+    background-color: grey;
+    color: black;
+    height: 80px;
+    width: 310px;
+    margin-top: 40%;
+    margin-left: 70%;
+
+}
+
+
+
+.linkbtn{
+    margin-top: 3px;
+    margin-left: 27%;
+    /* margin-bottom: 3px; */
+}
+

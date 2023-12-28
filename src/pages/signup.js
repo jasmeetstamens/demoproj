@@ -11,7 +11,7 @@ function Signup() {
   const [pass, setPass]=useState("")
   const [cpass, setCpass] = useState("") 
   const [data, setData]= useState("")
-
+  const[email, setEmail]= useState("");
   
     
   let navigate = useNavigate();
@@ -31,7 +31,9 @@ function Signup() {
         setCpass(e.target.value)
     }
      
-
+const handleEmail=(e)=>{
+  setEmail(e.target.value)
+}
 
     const handleSignUp = (e) => {
       const userKey = `user_${uname}`; 
@@ -53,6 +55,7 @@ function Signup() {
               name: name,
               uname: uname,
               cpass: cpass,
+              email: email,
             };
         // localStorage.setItem(`name_${uname}`, name)
         // localStorage.setItem(`uname_${uname}`, uname)
@@ -86,6 +89,7 @@ function Signup() {
     <TextField label="Username" variant="outlined" className='text' onChange={handleChangeUname} required></TextField><br/>
     <TextField type='text' label="password" inputProps={{ maxLength: 12 }} variant="outlined" className='text' onChange={handleChangePass} required></TextField><br/>
     <TextField type='password' label="confirm password" variant="outlined" className='text' onChange={handleCpass} required></TextField><br/>
+    <TextField type='email' label='email' variant='outlined' className='text' onChange={handleEmail} required></TextField><br/>
     <Button type="submit" variant="contained" color="primary" className='btnn' >Confirm</Button><br/>
     <Button variant="contained" color="primary" className='btnn' onClick={handleLogin}> Login page</Button>
 

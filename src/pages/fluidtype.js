@@ -24,9 +24,12 @@ function Fluidtype(props) {
   const [imageName, setImageName] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageurl, setImageurl] = useState("")
-  const [resize, setResize] = useState(false)
   const [num, setNum] = useState([1]);
+  const [updatebtn, setUpdatebtn]= useState(false);
+  const [cancelbtn, setCancelbtn] = useState(false);
+const [showpopup, setShowpopup] = useState(false);
 
+ 
 
   let data = props.savedata;
   let userKey = props.loginusername;
@@ -76,7 +79,7 @@ const handleWater = (e)=>{
         };
         reader.readAsDataURL(file);
       } else {
-
+        setShowpopup(true)
         setImageName('')  
           
 
@@ -124,6 +127,7 @@ const handleWater = (e)=>{
     if (!imageName) {
       if (selectedImage) {
            if(greatersize){
+            if(updatebtn){
             const resizeFile = (file) =>
             new Promise((resolve) => {
               Resizer.imageFileResizer(
@@ -150,6 +154,11 @@ const handleWater = (e)=>{
              catch (err) {
               console.log(err);
             }
+          }}else if(cancelbtn){
+            setImageurl();
+            setImageName('');
+            setSelectedImage('');
+
           }
     }
       };
@@ -157,24 +166,28 @@ const handleWater = (e)=>{
     }
     
       useEffect(()=>{
-        Resize()
-      },[resize])     
-                           
-    
-
-  
-
+        if(updatebtn){
+          Resize();
+          setUpdatebtn(false);
+          setShowpopup(false);
+        }else if(cancelbtn){
+          setShowpopup(false);
+          setCancelbtn(false);   
+        }
+       
+      },[updatebtn, cancelbtn])     
 
 
     return (
 
       <div className='main-fluid'>
-  
   <div className='resize'>
-          {greatersize?
-               (<Popup setResize={setResize} />): null
-              }
-   </div>
+          {showpopup?    
+          <Popup setUpdatebtn={setUpdatebtn} setCancelbtn={setCancelbtn} setShowpopup={setShowpopup} />
+           :
+          null
+              } 
+   </div> 
 
         <div className='aboveline'>
           <p className='fluid'>FluidType:</p>

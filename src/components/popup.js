@@ -3,20 +3,21 @@ import './popup.css';
 
 
 function Popup(prop) {
-        const[cancel,setCancel]=useState(); 
 
 const handlecancel=()=>{
-    setCancel(false)
+    prop.setCancelbtn(true);
+    prop.setShowpopup(false);
 }
-  const  resize = ()=>{
-    prop.setResize(true);
-    }
+
+  const  handleresize = ()=>{
+    prop.setUpdatebtn(true)
+  }
 
   return (
 
 <div className='popup'>
 <p className='ppop'>size is greater than 1024*1024</p>
-<button onClick={resize} className='popbtn'>Update Size</button>
+<button onClick={handleresize}  className='popbtn'>Update Size</button>
 
 <button onClick={handlecancel} className='cancelbtn'>cancel</button>
 </div>

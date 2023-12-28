@@ -8,6 +8,8 @@ import View from './pages/view';
 import { useState } from 'react';
 import Signup from './pages/signup';
 import Login from './pages/login';
+import Api from './pages/api';
+
 
 
 
@@ -44,7 +46,8 @@ function App() {
              <Routes>
              <Route path='/' element={<Signup />} />
           <Route path='/login' element={<Login setLogin={setLogin} setLoginusername={setLoginusername}/>} />
-          
+          <Route path='/api' element={<Api/>}/>
+     
              </Routes>
           </BrowserRouter>
           </div>
