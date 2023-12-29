@@ -7,29 +7,28 @@ import CircularProgress from '@mui/material/CircularProgress';
 function Api() {
        const [data, setData] = useState([])
 
- useEffect(()=>{ 
-    const fetchdata = async ()=>{
-        try{
-  const response = await  fetch('http://122.176.101.76:8082/api/SampleMarkets/GetAllSampleMarketsMobile?pageNumber=1&pageSize=8')
-    const data = response.json()
-    setData(data)
-}catch(error){
-    console.log(error);
-}
-    }
-
-    fetchdata();
-   return ()=>{}
- },[data])
+//  useEffect(()=>{ 
+  
+//     const fetchdata = async ()=>{
+//         try{
+//   const response = await  fetch('http://122.176.101.76:8082/api/SampleMarkets/GetAllSampleMarketsMobile?pageNumber=1&pageSize=8')
+//   const data = await response.json();
+//   setData(data);
+// } catch (error) {
+//   console.error('Error fetching data:', error);
+// } 
+//     }
+//     fetchdata();
+//  },[])
 
 
   return (
     <div>
-  {data.length===0 ? <div className='loading' ><h1><CircularProgress /></h1></div> : <> <h1>data: </h1><ul>
+  {data.length===0 ? <div className='loading' ><h1><CircularProgress /></h1></div> :<ul>
               {data.map((e) => (
-             <li key={e.id}>{e.id}-{e.productName}</li>
+             <li key={e.id}>{e.id}</li>
               ))}
-            </ul></>}
+            </ul>}
     </div>
   )
 }

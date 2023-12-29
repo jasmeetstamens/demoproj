@@ -13,6 +13,8 @@ function Login(props) {
 const [showpopup, setShowpopup] =useState(false)
 const[cancelbtn, setCancelbtn] =useState(false)
 
+
+
    const userKey = `user_${uname}`; 
 
    let navigate = useNavigate();
@@ -28,6 +30,7 @@ const[cancelbtn, setCancelbtn] =useState(false)
     const stored = JSON.parse(localStorage.getItem(userKey));
       if(cpass=== stored.cpass && uname === stored.uname)
        { 
+        localStorage.setItem('isLoggedIn', 'true');
         props.setLogin(true);
       navigate("/view")
         props.setLoginusername(userKey);
@@ -35,9 +38,15 @@ const[cancelbtn, setCancelbtn] =useState(false)
        else
        {
         alert("username or password wrong")
-       }
-          
+       }          
    }
+
+   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      props.setLogin(true);
+    }
+  }, []);
 
 const handleSignup =()=>{
   navigate("/")
