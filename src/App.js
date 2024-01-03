@@ -18,12 +18,12 @@ function App() {
   const [login, setLogin]  = useState(false);
   const [loginusername, setLoginusername] = useState('');
 
-
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   return (  
 
 
-  login ? 
+  login || isLoggedIn ? 
       ( <div className="App">  
          <BrowserRouter> 
          
@@ -48,7 +48,7 @@ function App() {
              <Routes>
              <Route path='/' element={<Signup />} />
           <Route path='/login' element={<Login setLogin={setLogin} setLoginusername={setLoginusername}/>} />
-          <Route path='/api' element={<Api/>}/>
+          <Route path='/api/:page?/:pageSize?' element={<Api/>}/>
      
              </Routes>
           </BrowserRouter>

@@ -41,12 +41,14 @@ const[cancelbtn, setCancelbtn] =useState(false)
        }          
    }
 
-   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
-      props.setLogin(true);
-    }
-  }, []);
+  //  useEffect(() => {
+  //   const isLoggedIn = localStorage.getItem('isLoggedIn');
+  //   if (isLoggedIn === 'true') {
+  //     navigate("/view")
+  //     props.setLogin(true);
+  //     // props.setLoginusername(userKey)
+  //   }
+  // }, []);
 
 const handleSignup =()=>{
   navigate("/")
