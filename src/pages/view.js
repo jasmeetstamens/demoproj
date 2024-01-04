@@ -1,13 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { DataGrid} from '@mui/x-data-grid';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
 
 function View() {
   const[row,setRow] = useState([])
-
+  const{user} = useParams()
+let navigate = useNavigate()
+const apiId = localStorage.getItem('apiId')
 
   useEffect(() => {
     const keys = Object.keys(localStorage);
@@ -17,7 +20,6 @@ function View() {
                  
     setRow(userData.map((data, index) => ({ id: index + 1, ...data })));
   }, []);
-
 
 
 
@@ -45,7 +47,24 @@ const columns = [
     },
 ];
 
+    
+useEffect(()=>{ 
+  const fetchdata = async ()=>{
+      try{
+const response = await  fetch(`http://122.176.101.76:8082/api/Users/SearchUserWithRoles?searchTerm=${user}`)
+const data = await response.json();
+} catch (error) {
+console.error('Error fetching data:', error);
+} 
+  }
+  fetchdata();
+},[user])
 
+
+
+useEffect(()=>{
+ navigate(`/view/${apiId}`)
+},[apiId, navigate])
 
   return (
 

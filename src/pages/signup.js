@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField,Button} from '@mui/material';
 import './signup.css';
@@ -12,7 +12,7 @@ function Signup() {
   const [cpass, setCpass] = useState("") 
   const [data, setData]= useState("")
   const[email, setEmail]= useState("");
-  
+const[apidata, setApidata] = useState({})
     
   let navigate = useNavigate();
 
@@ -76,6 +76,20 @@ const handleEmail=(e)=>{
   navigate('/login')
  }
 
+    
+useEffect(()=>{ 
+  const fetchdata = async ()=>{
+      try{
+const response = await  fetch(`http://122.176.101.76:8082/api/Users/SearchUserWithRoles?searchTerm=rs15310`)
+const data = await response.json();
+setApidata(data);
+localStorage.setItem('apiId', data[0].code.toLowerCase())
+} catch (error) {
+console.error('Error fetching data:', error);
+} 
+  }
+  fetchdata();
+},[])
 
 
   return ( 

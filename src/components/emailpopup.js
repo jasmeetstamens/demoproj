@@ -13,33 +13,26 @@ function Emailpopup(prop) {
           
      const sendEmail = ()=>{
 
-      var data = {
-        service_id: 'service_5u9qa2h',
-        template_id: 'template_rk1crtc',
-        user_id: '_CzvcremTQcGhkVYP',
-        template_params: {
-          to_name: 'Jass',
-                from_name: 'j',
-                message: 'Hello, this is a test email!',
-        }
-    };
+      if (!email) {
+        alert('Please enter a valid email address.');
+        return;
+      }
 
-      fetch('https://api.emailjs.com/api/v1.0/email/send',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            alert('Your mail is sent!');
-        })
-        .catch(error => {
-            alert(error);
-        });
+    var templateParams = {
+      to_name: 'Jass',
+      from_name: 'j',
+      message : 'Check this out!',
+      to_email: email,
+  };
+   
+  emailjs.send('service_zlb1cod', 'template_rk1crtc', templateParams, '0n22i0KLQ0h3yJwYm')
+      .then(function(response) {
+        alert('Email sent successfully!');
+        prop.setShowpopup(false);
+      }, function(error) {
+         console.log('FAILED...', error);
+      });
+
 
      }     
 

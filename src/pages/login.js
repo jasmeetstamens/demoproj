@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Button, Link } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Emailpopup from '../components/emailpopup';
@@ -13,11 +13,10 @@ function Login(props) {
 const [showpopup, setShowpopup] =useState(false)
 const[cancelbtn, setCancelbtn] =useState(false)
 
-
-
    const userKey = `user_${uname}`; 
 
    let navigate = useNavigate();
+
 
    const handleName = (e) =>{
       setUname(e.target.value)
@@ -26,29 +25,23 @@ const[cancelbtn, setCancelbtn] =useState(false)
     setPass(e.target.value)
    }
 
+
    const handleLogin= () =>{
     const stored = JSON.parse(localStorage.getItem(userKey));
+    const apiId = localStorage.getItem('apiId')
       if(cpass=== stored.cpass && uname === stored.uname)
        { 
         localStorage.setItem('isLoggedIn', 'true');
         props.setLogin(true);
-      navigate("/view")
+      navigate(`/view/${apiId}`)
         props.setLoginusername(userKey);
        }
        else
        {
         alert("username or password wrong")
-       }          
+       }
    }
 
-  //  useEffect(() => {
-  //   const isLoggedIn = localStorage.getItem('isLoggedIn');
-  //   if (isLoggedIn === 'true') {
-  //     navigate("/view")
-  //     props.setLogin(true);
-  //     // props.setLoginusername(userKey)
-  //   }
-  // }, []);
 
 const handleSignup =()=>{
   navigate("/")
@@ -67,9 +60,9 @@ useEffect(()=>{
     setCancelbtn(false);   
     setForgot(false);
   }
-}, [forgot,])
+}, [forgot])
 
-  
+
 
   return (
 <>

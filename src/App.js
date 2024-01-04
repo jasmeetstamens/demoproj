@@ -33,7 +33,7 @@ function App() {
         </div>
         <div className='right'>
         <Routes>
-          <Route path='/view' element={<View />} />
+          <Route path='/view/:user?' element={<View />} />
           <Route path='/create' element={<Create />} />
           <Route path='/fluidtype' element={<Fluidtype savedata={savedata} setSavedata={setSavedata} loginusername={loginusername}/>} />
         </Routes>

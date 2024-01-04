@@ -1,30 +1,36 @@
 
 import React, { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useParams } from 'react-router-dom'; 
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { DataGrid } from '@mui/x-data-grid';
+import { Button } from 'semantic-ui-react';
+import {ButtonGroup} from '@mui/material';
 
 
 
 function Api() {
   
        const [data, setData] = useState([])
-      const{page=10, pageSize=10} = useParams() 
+      const{page, pageSize} = useParams() 
   const[row, setRow] = useState([])
+  const [counter, setCounter] = useState(parseInt(page) || 1);
+  const [count, setCount] = useState(parseInt(pageSize) || 1);
+  const navigate = useNavigate() 
+
 
  useEffect(()=>{ 
 
     const fetchdata = async ()=>{
         try{
-  const response = await  fetch(`http://122.176.101.76:8082/api/SampleMarkets/GetAllSampleMarketsMobile?pageNumber=${page}&pageSize=${pageSize}`)
+  const response = await  fetch(`http://122.176.101.76:8082/api/SampleMarkets/GetAllSampleMarketsMobile?pageNumber=${counter}&pageSize=${count}`)
   const data = await response.json();
-  setData(data.records);
+  setData(data.records );
 } catch (error) {
   console.error('Error fetching data:', error);
 } 
     }
     fetchdata();
- },[page, pageSize])
+ },[counter, count])
 
  useEffect(() => {      
   if (data.length > 0 ) {           
@@ -52,13 +58,53 @@ const columns = [
   },
 ];
 
+useEffect(()=>{
+navigate(`/api/${counter}/${count}`)
+},[counter, count])
 
 
   return (
     <div style={{ height: '100%', width: '100%', marginTop: 15, marginLeft:5}}>
         
   {data.length===0 ? (<div className='loading' ><h1><CircularProgress /></h1></div>) :(
+    <>
   <DataGrid rows={row} columns={columns} hideFooter={true} />
+
+
+<ButtonGroup size="small" aria-label="small outlined button group"> 
+  <Button 
+     onClick={()=>{ setCounter((counter) => counter + 1)}}> + </Button>
+
+   <Button >Page {Math.max(counter, 1)}</Button>
+   <Button
+     onClick={() => {
+       setCounter((counter) => Math.max(counter - 1, 1));
+     }}
+   >
+     -
+   </Button>
+
+ </ButtonGroup>
+
+
+
+ <ButtonGroup size="small" aria-label="small outlined button group" style={{marginLeft: '10px'}}> 
+  <Button  
+     onClick={() => {setCount((count) => count + 1)}}> + </Button>
+
+   <Button>PageSize {count}</Button>
+   <Button
+     onClick={() => {
+       setCount((count) => count - 1);
+     }}
+   >
+     -
+   </Button>
+   
+ </ButtonGroup>
+
+
+</>
 )}
        
     </div>
