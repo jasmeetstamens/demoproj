@@ -10,6 +10,7 @@ import { TextField } from '@mui/material';
 import { useState } from 'react';
 import  Resizer  from 'react-image-file-resizer'; 
 import Popup from '../components/popup';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -29,7 +30,10 @@ function Fluidtype(props) {
   const [cancelbtn, setCancelbtn] = useState(false);
 const [showpopup, setShowpopup] = useState(false);
 
- 
+ const user = useParams()
+let navigate = useNavigate()
+const apiId = localStorage.getItem('apiId')
+
 
   let data = props.savedata;
   let userKey = props.loginusername;
@@ -91,6 +95,25 @@ const handleWater = (e)=>{
   }
 
   const keys = JSON.parse(localStorage.getItem(userKey))
+
+  useEffect(()=>{ 
+    const fetchdata = async ()=>{
+        try{
+  const response = await  fetch(`http://122.176.101.76:8082/api/Users/SearchUserWithRoles?searchTerm=${user}`)
+  const data = await response.json();
+  } catch (error) {
+  console.error('Error fetching data:', error);
+  } 
+    }
+    fetchdata();
+  },[user])
+  
+  
+  
+  useEffect(()=>{
+   navigate(`/fluidtype/${apiId}`)
+  },[apiId, navigate])
+
 
 
 

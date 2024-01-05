@@ -32,6 +32,10 @@ const handleSave = (e)=>{
   
 }
 
+const handleUserdetail = (e) =>{
+  navigate('/details')
+}
+
   return (
     <div>
     
@@ -40,6 +44,7 @@ const handleSave = (e)=>{
       <button className='btn' onClick={handleCreate}>create</button><br/>
       <button className='btn' onClick={handleView}>View</button><br/>
       <button className='btn' onClick={handleSave} >save</button><br/>
+      <button className='btn' onClick={handleUserdetail}>UserDetails</button><br/>
       
     </div>
   )

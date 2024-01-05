@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import Api from './pages/api';
+import Userdetails from './pages/userdetails';
 
 
 
@@ -34,8 +35,9 @@ function App() {
         <div className='right'>
         <Routes>
           <Route path='/view/:user?' element={<View />} />
-          <Route path='/create' element={<Create />} />
-          <Route path='/fluidtype' element={<Fluidtype savedata={savedata} setSavedata={setSavedata} loginusername={loginusername}/>} />
+          <Route path='/create/:user?' element={<Create />} />
+          <Route path='/fluidtype/:user?' element={<Fluidtype savedata={savedata} setSavedata={setSavedata} loginusername={loginusername}/>} />
+          <Route path='/details/:user?' element={<Userdetails/>}/>
         </Routes>
         </div>
         </BrowserRouter>
