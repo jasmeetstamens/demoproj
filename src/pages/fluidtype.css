@@ -63,3 +63,7 @@
     position: absolute;
     z-index: 6;
 }
+
+.main-fluid{
+    min-height: 100%;
+}

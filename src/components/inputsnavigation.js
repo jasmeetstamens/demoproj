@@ -37,14 +37,14 @@ const handleUserdetail = (e) =>{
 }
 
   return (
-    <div>
+    <div className='mainnav'>
     
        <h1>Inputs</h1>
-      <button className='btn' onClick={handleFluid}>fluidtypes</button><br/>
-      <button className='btn' onClick={handleCreate}>create</button><br/>
-      <button className='btn' onClick={handleView}>View</button><br/>
-      <button className='btn' onClick={handleSave} >save</button><br/>
-      <button className='btn' onClick={handleUserdetail}>UserDetails</button><br/>
+      <button className='btni' onClick={handleFluid}>fluidtypes</button><br/>
+      <button className='btni' onClick={handleCreate}>create</button><br/>
+      <button className='btni' onClick={handleView}>View</button><br/>
+      <button className='btni' onClick={handleSave} >save</button><br/>
+      <button className='btni' onClick={handleUserdetail}>UserDetails</button><br/>
       
     </div>
   )

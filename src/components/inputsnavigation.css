@@ -1,13 +1,24 @@
+
+.mainnav{
+    
+    align-items: center;
+    min-height: 100%;
+    
+}
+
+
 h1{
     margin: 0px;
     padding: 65px;
+    min-height: 7vh;
+    min-width: 60%;
 }
 
-.btn{
+.btni{
     margin-top: 20px;
     margin-left: 55px;
-    height: 55px;
-    width: 235px;
+    min-height: 7vh;/*55px;*/
+    min-width: 60%;
     background-color: rgb(73, 70, 70);  background-color: rgb(54, 53, 53);  color: white;
     border-radius: 12px;
     align-items: center;

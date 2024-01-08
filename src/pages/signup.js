@@ -97,7 +97,7 @@ console.error('Error fetching data:', error);
       <div className='main' >
 
 <form onSubmit={handleSignUp}  className='signupform'>
-      <h1 >SignUp Here!</h1>
+      <h1 style={{minWidth: 'auto', padding: '30px'}}>SignUp Here!</h1>
 
     <TextField type='text' label="Name" variant="outlined" className='text' onChange={handleChangeName} required></TextField> <br/>
     <TextField label="Username" variant="outlined" className='text' onChange={handleChangeUname} required></TextField><br/>

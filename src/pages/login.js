@@ -78,22 +78,22 @@ useEffect(()=>{
    <div className="login-form" >
 
    <h1>Login Here</h1>
- <TextField label="Username" className='text' variant="outlined" fullWidth onChange={handleName} disabled/>
- <TextField label="Password" className='text' type="password" variant="outlined" fullWidth onChange={handlePass} disabled/>
+ <TextField label="Username" className='texts' variant="outlined" fullWidth onChange={handleName} disabled/>
+ <TextField label="Password" className='texts' type="password" variant="outlined" fullWidth onChange={handlePass} disabled/>
 <p onClick={handleforgot} style={{margin: 0,padding: 0, cursor: 'pointer', color:'blue'}} disabled>Forgot password?</p>
- <Button variant="contained" className='btn'  color="primary" onClick={handleLogin} disabled>Login</Button>
- <Button variant="contained" className='btn' color="primary" onClick={handleSignup}  disabled>SignUp First</Button>
+ <Button variant="contained" className='btns'  color="primary" onClick={handleLogin} disabled>Login</Button>
+ <Button variant="contained" className='btns' color="primary" onClick={handleSignup}  disabled>SignUp First</Button>
 
 </div> 
 ) : (
   <div className="login-form">
 
   <h1>Login Here</h1>
-<TextField label="Username" className='text' variant="outlined" fullWidth onChange={handleName}/>
-<TextField label="Password" className='text' type="password" variant="outlined" fullWidth onChange={handlePass}/>
+<TextField label="Username" className='texts' variant="outlined" fullWidth onChange={handleName}/>
+<TextField label="Password" className='texts' type="password" variant="outlined" fullWidth onChange={handlePass}/>
 <p onClick={handleforgot} style={{margin: 0,padding: 0, cursor: 'pointer', color:'blue'}}>Forgot password?</p>
-<Button variant="contained" className='btn'  color="primary" onClick={handleLogin}>Login</Button>
-<Button variant="contained" className='btn' color="primary" onClick={handleSignup}>SignUp First</Button>
+<Button variant="contained" className='btns'  color="primary" onClick={handleLogin}>Login</Button>
+<Button variant="contained" className='btns' color="primary" onClick={handleSignup}>SignUp First</Button>
 
 </div> 
 ) }

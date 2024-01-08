@@ -12,12 +12,17 @@
   z-index: 1;
 }
 
-.btn{
-  width: 60%;
+.btns{
+  /* width: 60%; */
+  min-width: 50%;
 }
 
 .emailpop{
   
   position: absolute;
   z-index: 6;
+}
+
+.texts{
+  min-width: 50%;
 }

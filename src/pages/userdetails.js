@@ -33,7 +33,7 @@ const apiId = localStorage.getItem('apiId')
       
 
         useEffect(()=>{ 
-            debugger
+
             const fetchdata = async ()=>{
                 try{
           const response = await  fetch(`http://122.176.101.76:8082/api/Users/SearchUserWithRoles?searchTerm=${userdata}`)
@@ -106,8 +106,7 @@ const handleAlluser=()=>{
 <Button type="submit" variant="contained" color="primary" style={{width:'100px', marginBottom:'10px', marginLeft:'10px'}} onClick={handleGetdata} >Get Data</Button>
 <Button type="submit" variant="contained" color="primary" style={{width:'100px', marginBottom:'10px', marginLeft:'10px'}} onClick={handleAlluser}>Get Allusers</Button>
 
-    
-    <DataGrid rows={row} columns={columns} hideFooter={true} />
+<DataGrid rows={row} columns={columns} hideFooter={true} style={{maxHeight: '70%'}}/>
   </div>
   )
 }

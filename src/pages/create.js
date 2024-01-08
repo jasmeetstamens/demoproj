@@ -27,7 +27,7 @@ useEffect(()=>{
 },[apiId, navigate])
 
   return (
-    <div>
+    <div className='maincreate'>
  <h1>create</h1> 
     </div>
   )

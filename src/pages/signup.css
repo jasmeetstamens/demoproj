@@ -7,14 +7,17 @@
   width: 100%;
 }
 
+
 .text{
     margin-bottom: 3px;
-    width: 30%;
+    /* width: 30%; */
+   min-width: 50%;
 } 
 
 
 .btnn{
-    width: 20%;
+    /* width: 20%; */
+    min-width: 50%;
   }
 
 .signupform{
@@ -25,3 +28,4 @@
     width: 50%;
 
 }
+
